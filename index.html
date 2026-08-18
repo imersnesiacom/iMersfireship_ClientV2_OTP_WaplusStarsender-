@@ -1608,7 +1608,7 @@ window.startOTPProcess = async (wa, email, actionType) => {
 
 window.executeFinalAction = () => {
     if (otpActionTarget === 'checkout') window.submitCheckout();
-    else if (otpActionTarget === 'register') window.saveUser();
+    else if (otpActionTarget === 'register') window.handleRegisterAction();
 };
 
 window.runOTPTimer = () => {
@@ -1670,9 +1670,10 @@ window.prepareCheckout = () => {
 };
 
 window.prepareRegister = () => {
+    const name = document.getElementById('regName')?.value.trim(); 
     const email = document.getElementById('regEmail')?.value.trim(); 
     const wa = document.getElementById('regWa')?.value.trim();
-    if(!wa || !email) return window.showToast("Lengkapi data pendaftaran!", "error");
+    if(!name || !wa || !email) return window.showToast("Lengkapi semua data pendaftaran!", "error");
     window.startOTPProcess(wa, email, 'register');
 };
     
